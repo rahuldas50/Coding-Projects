@@ -1,0 +1,48 @@
+#include <Servo.h>
+
+// Define servo objects
+Servo servo1;
+Servo servo2;
+Servo servo3;
+
+// Define potentiometer pins
+const int potPin1 = A0;
+const int potPin2 = A1;
+const int potPin3 = A2;
+
+// Define variables to store potentiometer values
+int potValue1 = 0;
+int potValue2 = 0;
+int potValue3 = 0;
+
+// Define servo positions
+int servoPos1 = 0;
+int servoPos2 = 0;
+int servoPos3 = 0;
+
+void setup() {
+  // Attach servo objects to pin numbers
+  servo1.attach(9);
+  servo2.attach(10);
+  servo3.attach(11);
+}
+
+void loop() {
+  // Read potentiometer values
+  potValue1 = analogRead(potPin1);
+  potValue2 = analogRead(potPin2);
+  potValue3 = analogRead(potPin3);
+
+  // Map potentiometer values to servo positions
+  servoPos1 = map(potValue1, 0, 1023, 0, 180);
+  servoPos2 = map(potValue2, 0, 1023, 0, 180);
+  servoPos3 = map(potValue3, 0, 1023, 0, 180);
+
+  // Set servo positions
+  servo1.write(servoPos1);
+  servo2.write(servoPos2);
+  servo3.write(servoPos3);
+
+  // Wait for servos to reach desired position
+  delay(15);
+}
